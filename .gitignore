@@ -1,0 +1,5 @@
+.venv
+alembic/versions/*
+.gitignore
+*.db
+
