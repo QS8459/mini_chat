@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from src.db.engine import Session
-from src.crud import chat as crud
-from src.schema import chat as schemas
+from src.core.service.chat import chat as crud
+from src.core.schema import chat as schemas
 from src.db.model import chat as models
 
 router = APIRouter(

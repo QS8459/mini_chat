@@ -4,8 +4,8 @@ from typing import List
 
 from src.db.engine import Session
 from src.db.model import message as models
-from src.crud import message as crud
-from src.schema import message as schemas
+from src.core.service.message import message as crud
+from src.core.schema import message as schemas
 
 router = APIRouter(
     prefix="/messages",
