@@ -3,7 +3,6 @@ from fastapi import (
     HTTPException,
     status
 )
-from src.conf.loging import log
 from src.core.service.base import BaseService
 from src.db.engine import get_async_session
 from src.db.model.chat.chat import Chat
@@ -13,6 +12,7 @@ from sqlalchemy import and_, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from uuid import UUID
+
 
 class ChatService(BaseService):
     def __init__(self, session: AsyncSession):
@@ -49,6 +49,7 @@ class ChatService(BaseService):
         proceed: bool = await self.check_if_exists(user1_id=kwargs.get("user1_id"), user2_id=kwargs.get('user2_id'))
         if proceed:
             return 1
+
 
 def get_chat_service(session=Depends(get_async_session)) -> ChatService:
     return ChatService(session)
