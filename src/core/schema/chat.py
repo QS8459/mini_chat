@@ -1,16 +1,14 @@
 from pydantic import BaseModel
+from uuid import UUID
 
-# Schemas for Chat
-class ChatBase(BaseModel):
-    chat_name: str
-    owner1_id: int
-    owner2_id: int
 
-class ChatCreate(ChatBase):
-    pass
-
-class Chat(ChatBase):
-    id: int
+class ChatBaseSchema(BaseModel):
+    user1_id: UUID
+    user2_id: UUID
 
     class Config:
         from_attributes = True
+
+
+class ChatAddSchema(ChatBaseSchema):
+    pass

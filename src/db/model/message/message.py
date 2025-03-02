@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Uuid, ForeignKey
-from src.db.model.base import BaseMixin
+from src.db.model.base import BaseModel
 
 from uuid import UUID
 
 
-class Messages(BaseMixin):
+class Messages(BaseModel):
     __tablename__ = "messages"
     # __table_ars__ = {"schema": "public"}
 
