@@ -1,9 +1,14 @@
-from pydantic.generics import GenericModel
-from typing import List, TypeVar, Generic, Type, Optional
-T = TypeVar('T', bound=GenericModel)
+from pydantic import BaseModel
+from typing import (
+    List,
+    TypeVar,
+    Generic,
+    Optional
+)
+T = TypeVar('T', bound=BaseModel)
 
 
-class GlobalResponseSchema(GenericModel, Generic[T]):
+class GlobalResponseSchema(BaseModel, Generic[T]):
     count: Optional[int]
     next: Optional[str] = None
     result: List[T]

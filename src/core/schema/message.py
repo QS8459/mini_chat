@@ -1,16 +1,19 @@
 from pydantic import BaseModel
 from datetime import datetime
+from uuid import UUID
 
-class MessageBase(BaseModel):
+
+class MessageBaseSchema(BaseModel):
     msg: str
-    chat_id: int
-    owner_id: int
+    chat_id: UUID
 
-class MessageCreate(MessageBase):
+
+class MessageAddSchema(MessageBaseSchema):
     pass
 
-class Message(MessageBase):
-    id: int
+
+class MessageResponseSchema(MessageBaseSchema):
+    id: UUID
     created_at: datetime
 
     class Config:
