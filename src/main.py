@@ -53,14 +53,9 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from contextlib import asynccontextmanager
-
-from sqlalchemy.orm import Session
-from typing import List
-
-from src.db import model as models
-import json
-
+from src.middleware.loging import logger
 from src.api import api
+
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
@@ -87,6 +82,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.middleware('http')(logger)
 app.include_router(api)
 
 
