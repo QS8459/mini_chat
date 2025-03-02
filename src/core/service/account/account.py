@@ -39,6 +39,5 @@ class AccountService(BaseService):
             )
 
 
-
 def get_account_service(session=Depends(get_async_session)) -> AccountService:
     return AccountService(session)

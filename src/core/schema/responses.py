@@ -11,6 +11,3 @@ class GlobalResponseSchema(GenericModel, Generic[T]):
     class Config:
         from_attributes = True
 
-
-def serialize_orm(sql_objs: List, pydantic_model: Type[T]):
-    return [pydantic_model.from_orm(obj) for obj in sql_objs]

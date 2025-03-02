@@ -4,18 +4,17 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from typing import Annotated
 from src.conf.settings import settings
+from src.conf.loging import log
 
 from src.core.service.account.account import AccountService, get_account_service
 from datetime import datetime, timedelta, timezone
-from uuid import uuid4
-import asyncio
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='api/v1/account/login/', scheme_name='jwt')
 
 
 async def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)],
-    acc_service=Depends(get_account_service)
+    token: str = Depends(oauth2_scheme),
+    acc_service: AccountService = Depends(get_account_service)
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -37,7 +36,10 @@ async def get_current_user(
             )
         user = await acc_service.get_by_email(username)
         return user
-    except InvalidTokenError:
+    except Exception as e:
+        log.info(token)
+        log.error(e)
+
         raise credentials_exception
 
 

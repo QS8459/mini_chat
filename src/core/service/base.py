@@ -39,7 +39,7 @@ class BaseService(ABC, Generic[T]):
         return result.scalars().all()
 
     @abstractmethod
-    async def before_add(self, instance, *args, **kwargs):
+    async def before_add(self, instance: Type[T] = None, *args, **kwargs):
         pass
 
     async def add(self, *args, **kwargs):
