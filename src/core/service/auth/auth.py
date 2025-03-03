@@ -1,5 +1,5 @@
 import jwt
-from jwt.exceptions import InvalidTokenError
+from jwt.exceptions import InvalidTokenError, InvalidSignatureError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from typing import Annotated
@@ -36,8 +36,7 @@ async def get_current_user(
             )
         user = await acc_service.get_by_email(username)
         return user
-    except Exception as e:
-        log.info(token)
+    except (InvalidTokenError, InvalidSignatureError) as e:
         log.error(e)
 
         raise credentials_exception
