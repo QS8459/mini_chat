@@ -7,6 +7,7 @@ from traceback import print_exception
 from sqlalchemy.future import select
 from sqlalchemy import func
 from src.conf.loging import log
+from uuid import UUID
 
 T = TypeVar('T')
 
@@ -64,3 +65,10 @@ class BaseService(ABC, Generic[T]):
             return await self.session.execute(query)
 
         return await self._exec(_get_count, refresh=False, fetch_one=False)
+
+    async def get_by_id(self, id: UUID):
+        async def _get_by_id(in_id: UUID):
+            query = select(self.model).where(self.model.id == in_id)
+            return await self.session.execute(query)
+
+        return await self._exec(_get_by_id, refresh=False, fetch_one=True, in_id=id)
