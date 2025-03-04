@@ -2,7 +2,6 @@ import jwt
 from jwt.exceptions import InvalidTokenError, InvalidSignatureError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from typing import Annotated
 from src.conf.settings import settings
 from src.conf.loging import log
 

@@ -6,11 +6,13 @@ COPY . .
 
 COPY requirements.txt /app
 
-RUN pip install -r requirements.txt
-RUN mkdir alembic
+RUN pip install --no-cache -r  requirements.txt
+#RUN mkdir alembic
 #RUN alembic init alembic
 
-RUN alembic revision --autogenerate -m "INIT" &&\
-    alembic upgrade head
+RUN chmod -x script.sh
+
+#RUN #alembic revision --autogenerate -m "INIT" &&\
+#    alembic upgrade head
 
 EXPOSE 5000
